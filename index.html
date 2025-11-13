@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centinela Web - Protección para PyMEs Latinoamericanas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="white" opacity="0.1"/></svg>');
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(50px) translateY(50px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 .highlight {
+            color: #ff6b6b;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .features-badge {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Alert Section */
+        .alert-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .alert-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .alert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .alert-card {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .alert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .alert-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 50px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.9);
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: white;
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .privacy-notice {
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #2d3748;
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 4em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+            }
+
+            .alert-section h2,
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+
+        .success-message {
+            display: none;
+            background: #48bb78;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">🛡️ Centinela Web</div>
+            <h1>Deja de ser el <span class="highlight">blanco fácil</span> de los hackers</h1>
+            <p class="subtitle">Auditoría de Ciberseguridad Web <strong>simple y asequible</strong> para PyMEs.</p>
+            <p style="font-size: 1.1em; margin-bottom: 20px;">Descubre en <strong>5 minutos</strong> las vulnerabilidades críticas de tu sitio web antes de que sea demasiado tarde.</p>
+            <div class="features-badge">
+                <div class="badge">✓ Sin tarjeta de crédito</div>
+                <div class="badge">⚡ Escaneo en 5 minutos</div>
+                <div class="badge">📊 Reportes en español</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Alert Section -->
+    <section class="alert-section">
+        <div class="container">
+            <h2>El 90% de los ciberataques apuntan a PyMEs<br>¿Estás protegido?</h2>
+            <p style="font-size: 1.2em;">Las grandes empresas tienen equipos de seguridad. Tú no. Los hackers lo saben.</p>
+            
+            <div class="alert-grid">
+                <div class="alert-card">
+                    <h3>🚨 Ransomware</h3>
+                    <p>Un solo ataque puede paralizar tu negocio por días o semanas</p>
+                </div>
+                <div class="alert-card">
+                    <h3>💔 Reputación</h3>
+                    <p>Una filtración de datos puede destruir la confianza de tus clientes</p>
+                </div>
+                <div class="alert-card">
+                    <h3>💰 Costos</h3>
+                    <p>Los costos de recuperación pueden ser de miles de dólares</p>
+                </div>
+            </div>
+            
+            <p style="font-size: 1.3em; margin-top: 40px; font-weight: 500;">Las soluciones actuales son demasiado caras y complejas para PyMEs.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Centinela Web: Tu Escudo de Seguridad Digital</h2>
+            <p class="section-subtitle">Simple y a tu alcance</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Escaneo Rápido y No Intrusivo</h3>
+                    <p>Analizamos tu sitio web en minutos, sin afectar su rendimiento. No necesitas instalar nada ni dar acceso a tu servidor.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Reporte en Español, Sin Jerga</h3>
+                    <p>Un puntaje de seguridad claro y una lista de tareas priorizadas (Crítico, Alto, Medio). Sin tecnicismos complicados.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Alerta Temprana</h3>
+                    <p>Te avisamos inmediatamente si detectamos un certificado SSL caducado o una vulnerabilidad crítica. Prevención antes que reacción.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Asequible para PyMEs</h3>
+                    <p>Diseñado para el presupuesto de PyMEs y emprendedores, no para corporaciones. Seguridad de calidad sin romper el banco.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white; margin-bottom: 20px;">Únete a la Lista de Acceso Prioritario</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 40px;">Sé uno de los primeros 50 en recibir tu escaneo de seguridad completamente gratis</p>
+            
+            <div class="form-container">
+                <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.5em;">¡Obtén tu Escaneo Gratuito!</h3>
+                <p style="text-align: center; margin-bottom: 30px;">Únete a la lista de acceso prioritario y sé de los primeros en proteger tu negocio</p>
+                
+                <form id="registroForm">
+                    <div class="form-group">
+                        <label>Nombre de tu Negocio *</label>
+                        <input type="text" id="negocio" required placeholder="Ej: Mi Tienda Online">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email (donde enviaremos el reporte) *</label>
+                        <input type="email" id="email" required placeholder="tu@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>¿Cuál es tu mayor preocupación de seguridad? (Opcional)</label>
+                        <textarea id="preocupacion" placeholder="Cuéntanos qué te preocupa..."></textarea>
+                    </div>
+                    
+                    <p style="font-size: 0.9em; margin-bottom: 20px;">Al registrarte, aceptas recibir información sobre Centinela Web. No compartiremos tu información con terceros.</p>
+                    
+                    <button type="submit" class="submit-btn">🚀 Obtener Mi Escaneo Gratuito</button>
+                    
+                    <div class="success-message" id="successMessage">
+                        ✅ ¡Registro exitoso! Recibirás tu reporte de seguridad pronto.
+                    </div>
+                </form>
+                
+                <div class="privacy-notice">
+                    🔒 Tus datos están seguros con nosotros. No compartiremos tu información con terceros. Solo recibirás actualizaciones importantes sobre Centinela Web y tu reporte de seguridad.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">90%</div>
+                    <div class="stat-label">de ciberataques apuntan a PyMEs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5 min</div>
+                    <div class="stat-label">para obtener tu reporte completo</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">en español, sin tecnicismos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="font-size: 1.5em;">🛡️ Centinela Web</div>
+                <p>Protegiendo PyMEs latinoamericanas con auditorías de seguridad web simples, claras y asequibles.</p>
+                <p>Dominio: <strong>chathannah.uk</strong></p>
+                <p>© 2025 Centinela Web. Desarrollado con ❤️ para PyMEs de LATAM.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const negocio = document.getElementById('negocio').value;
+            const email = document.getElementById('email').value;
+            const preocupacion = document.getElementById('preocupacion').value;
+            
+            // Aquí conectarías con tu backend
+            console.log('Registro:', { negocio, email, preocupacion });
+            
+            // Mostrar mensaje de éxito
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Limpiar formulario
+            this.reset();
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
